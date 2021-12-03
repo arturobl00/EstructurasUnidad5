@@ -16,8 +16,7 @@ void main(){
                 scanf("%d",&val1);
                 printf("Proporciones el segundo valor: ");
                 scanf("%d",&val2);
-                res = egipcia(val1, val2);
-                printf("%d",res);
+                egipcia(val1, val2);
                 getch();
                 break;
             case 2:
@@ -36,10 +35,55 @@ void main(){
 }
 
 int egipcia (int v1, int v2){
-    int res;
+    int x = 1;
+    int valores[500];
+    int cont = -1;
+    float doble = 0.5;
+    printf("Valor 1: %d, Valor 2: %d",v1, v2);
     //Identificaar el mas chico
     if (v1 >= v2){
-        
+        //Iniciar el valor mas pequeño en 1 y hacer ingrementos del doble hasta tener un valor mayor
+        do{
+            //printf("Doble vale %f",doble);
+            doble = doble * 2;
+            cont++;           
+        }while (doble <= v2);
+        //printf("%d", cont);
+        doble = 0.5;
+        cont = -1;
+        do{
+            doble = doble * 2;
+            cont++;
+            if (cont == 1){
+                valores[cont] = v1;
+            }else{
+                valores[cont] = v1 * 2;
+            }           
+        }while (doble <= v2);
+        getch();
     }
-    return res;
+    else{
+        //Iniciar el valor mas pequeño en 1 y hacer ingrementos del doble hasta tener un valor mayor
+        do{
+            //printf("Doble vale %f",doble);
+            doble = doble * 2;
+            cont++;           
+        }while (doble <= v1);
+        //printf("%d", cont);
+        doble = 0.5;
+        cont = -1;
+        do{
+            doble = doble * 2;
+            cont++;
+            if (cont == 1){
+                valores[cont] = v2;
+            }else{
+                valores[cont] = v2 * 2;
+            }           
+        }while (doble <= v2);
+        getch();
+    }   
+    for(x=1; x<=cont; x++){
+        printf("\n %d ",valores[x]);
+    }
 }
