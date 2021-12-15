@@ -1,5 +1,6 @@
 #include <stdio.h>
-int val1, val2, res, opc;
+#include <math.h>
+int a, b, res, opc;
 
 void main(){
     do{
@@ -13,10 +14,10 @@ void main(){
             case 1:
                 printf("Multiplicacion Egipcia.\n");
                 printf("Proporciones el primer valor: ");
-                scanf("%d",&val1);
+                scanf("%d",&a);
                 printf("Proporciones el segundo valor: ");
-                scanf("%d",&val2);
-                egipcia(val1, val2);
+                scanf("%d",&b);
+                egipcia(a, b);
                 getch();
                 break;
             case 2:
@@ -34,56 +35,42 @@ void main(){
     }while(opc!= 3);
 }
 
-int egipcia (int v1, int v2){
-    int x = 1;
-    int valores[500];
-    int cont = -1;
-    float doble = 0.5;
-    printf("Valor 1: %d, Valor 2: %d",v1, v2);
-    //Identificaar el mas chico
-    if (v1 >= v2){
-        //Iniciar el valor mas pequeño en 1 y hacer ingrementos del doble hasta tener un valor mayor
-        do{
-            //printf("Doble vale %f",doble);
-            doble = doble * 2;
-            cont++;           
-        }while (doble <= v2);
-        //printf("%d", cont);
-        doble = 0.5;
-        cont = -1;
-        do{
-            doble = doble * 2;
-            cont++;
-            if (cont == 1){
-                valores[cont] = v1;
-            }else{
-                valores[cont] = v1 * 2;
-            }           
-        }while (doble <= v2);
+int egipcia (int va, int vb){
+    int fin = 1;
+    int pos = 1;
+    if(va < vb){
+        printf("%d",fin);
         getch();
+        do{
+            fin = fin * 2;
+            if(fin <= va){
+                printf("%d",fin);
+                pos++;
+                getch();
+            }
+        }while(fin<=va);
+        fin = fin / 2;
+        printf("de tantas pos %d",pos);
+        getch();
+        egipcia2(pos, vb);
     }
-    else{
-        //Iniciar el valor mas pequeño en 1 y hacer ingrementos del doble hasta tener un valor mayor
-        do{
-            //printf("Doble vale %f",doble);
-            doble = doble * 2;
-            cont++;           
-        }while (doble <= v1);
-        //printf("%d", cont);
-        doble = 0.5;
-        cont = -1;
-        do{
-            doble = doble * 2;
-            cont++;
-            if (cont == 1){
-                valores[cont] = v2;
-            }else{
-                valores[cont] = v2 * 2;
-            }           
-        }while (doble <= v2);
-        getch();
+}
+
+int egipcia2 (int pos, int vb){
+    printf("\n");
+    int arreglo[2][pos];
+    int x;
+    int fin = 1;
+    for (x=0; x<pos; x++){
+        arreglo[0][x] = fin;
+        arreglo[1][x] = vb;
+
+        fin = fin *2;
+        vb = vb * 2;       
+    }
+
+    for(x=0; x<pos; x++){
+        printf("%d - %d\n",arreglo[0][x], arreglo[1][x]);
     }   
-    for(x=1; x<=cont; x++){
-        printf("\n %d ",valores[x]);
-    }
+    getch();
 }
